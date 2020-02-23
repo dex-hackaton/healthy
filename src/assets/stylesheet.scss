@@ -1,13 +1,25 @@
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("fonts/SFProDisplay-Medium.eot");
+  src: local("SF Pro Display Medium"), local("SFProDisplay-Medium"),
+    url("fonts/SFProDisplay-Medium.eot?#iefix") format("embedded-opentype"),
+    url("fonts/SFProDisplay-Medium.woff2") format("woff2"),
+    url("fonts/SFProDisplay-Medium.woff") format("woff"),
+    url("fonts/SFProDisplay-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: SF Pro Display, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

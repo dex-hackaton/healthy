@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-router": "^5.1.4",
     "@types/styled-components": "^5.0.0",
+    "babel-plugin-macros": "^2.8.0",
     "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
