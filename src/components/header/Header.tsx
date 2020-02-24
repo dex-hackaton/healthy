@@ -1,54 +1,33 @@
-import React from "react";
-import { BootstrapContainer } from "../ui/BootstrapContainer";
+import React, { useEffect, useState } from "react";
+import { HeaderLine } from "./HeaderLine";
 import styled from "styled-components/macro";
-import { iconsPaths } from "../../core/iconsPaths";
+import { Menu } from "../menu/menu";
 
 export const Header = () => {
+  const [menu, setMenu] = useState(false);
+
+  useEffect(() => {});
+
+  const menuHandler = () => {
+    setMenu(!menu);
+  };
+
   return (
-    <HeadContainer>
-      <BootstrapContainer>
-        <MainBlock>
-          <LeftBlock>
-            <IconImage src={iconsPaths.menu} alt="" />
-            <IconImage src={iconsPaths.logo} alt="" />
-          </LeftBlock>
-          <RightBlock>
-            <IconImage src={iconsPaths.search} alt="" />
-            <IconImage src={iconsPaths.notification} alt="" />
-            <IconImage src={iconsPaths.profile} alt="" />
-          </RightBlock>
-        </MainBlock>
-      </BootstrapContainer>
-    </HeadContainer>
+    <HeaderContainer>
+      <HeaderLine setMenu={menuHandler} />
+      {menu ? <Menu menuHandler={menuHandler} /> : null}
+    </HeaderContainer>
   );
 };
 
-const HeadContainer = styled.header`
+const HeaderContainer = styled.header`
+  position: sticky;
+  flex-shrink: 0;
+  z-index: 20;
+  left: 0;
+  top: 0;
+  will-change: top;
+  user-select: none;
+  width: 100%;
   height: 50px;
-  display: flex;
-  align-items: center;
-  background: #bae7ff;
 `;
-
-const MainBlock = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const LeftBlock = styled.div`
-  display: flex;
-  align-items: center;
-  > :first-child {
-    padding-right: 16px;
-  }
-`;
-const RightBlock = styled.div`
-  display: flex;
-  align-items: center;
-  > :nth-child(2) {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-`;
-
-const IconImage = styled.img``;
