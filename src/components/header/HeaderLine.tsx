@@ -1,27 +1,27 @@
-import React, { FC } from "react";
-import { BootstrapContainer } from "../ui/BootstrapContainer";
-import styled from "styled-components/macro";
-import { iconsPaths } from "../../core/iconsPaths";
+import React, {FC} from "react";
+import {BootstrapContainer} from "../ui/BootstrapContainer";
+import styled from "styled-components";
+import {iconsPaths} from "../../core/iconsPaths";
 
 interface IProps {
   setMenu: () => void;
 }
 
-export const HeaderLine: FC<IProps> = ({ setMenu }) => {
+export const HeaderLine: FC<IProps> = ({setMenu}) => {
   return (
-    <HeadBlock>
-      <BootstrapContainer>
-        <MainBlock>
-          <LeftBlock>
-            <IconImage onClick={setMenu} src={iconsPaths.menu} alt="" />
-            <IconImage src={iconsPaths.logo} alt="" />
-          </LeftBlock>
-          <RightBlock>
-            <IconImage src={iconsPaths.search} alt="" />
-            <IconImage src={iconsPaths.notification} alt="" />
-            <IconImage src={iconsPaths.profile} alt="" />
-          </RightBlock>
-        </MainBlock>
+      <HeadBlock>
+        <BootstrapContainer>
+          <MainBlock>
+            <LeftBlock>
+              <IconImage onClick={setMenu} src={iconsPaths.menu} alt=""/>
+              <IconImage src={iconsPaths.logo} alt=""/>
+            </LeftBlock>
+            <RightBlock>
+              <IconImage src={iconsPaths.search} alt=""/>
+              <IconImage src={iconsPaths.notification} alt=""/>
+              <IconImage src={iconsPaths.profile} alt=""/>
+            </RightBlock>
+          </MainBlock>
       </BootstrapContainer>
     </HeadBlock>
   );

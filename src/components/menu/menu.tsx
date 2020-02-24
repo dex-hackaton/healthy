@@ -1,29 +1,29 @@
-import React, { createRef, FC, useEffect, useRef } from "react";
-import styled, { css } from "styled-components/macro";
-import { MenuLinks } from "../../core/menuLinks";
-import { Link, useLocation } from "react-router-dom";
-import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
-import { Button } from "antd";
+import React, {createRef, FC, useEffect} from "react";
+import styled, {css} from "styled-components";
+import {MenuLinks} from "../../core/menuLinks";
+import {Link, useLocation} from "react-router-dom";
+import {clearAllBodyScrollLocks, disableBodyScroll} from "body-scroll-lock";
+import {Button} from "antd";
 
 interface IProps {
-  menuHandler: () => void;
+    menuHandler: () => void;
 }
 
-export const Menu: FC<IProps> = ({ menuHandler }) => {
-  const location = useLocation();
-  const refElement = createRef<HTMLDivElement>();
-  useEffect(() => {
-    refElement.current && disableBodyScroll(refElement.current);
-    return () => clearAllBodyScrollLocks();
-  });
+export const Menu: FC<IProps> = ({menuHandler}) => {
+    const location = useLocation();
+    const refElement = createRef<HTMLDivElement>();
+    useEffect(() => {
+        refElement.current && disableBodyScroll(refElement.current);
+        return () => clearAllBodyScrollLocks();
+    });
 
-  return (
-    <MenuContainer>
-      <MenuItemsContainer ref={refElement}>
-        {MenuLinks.map((link, index) => (
-          <MenuItemBlock
-            key={index + link.name}
-            onClick={menuHandler}
+    return (
+        <MenuContainer>
+            <MenuItemsContainer ref={refElement}>
+                {MenuLinks.map((link, index) => (
+                    <MenuItemBlock
+                        key={index + link.name}
+                        onClick={menuHandler}
             isActive={location.pathname === link.path}
           >
             <MenuItem to={link.path}>{link.name}</MenuItem>

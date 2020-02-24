@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { HeaderLine } from "./HeaderLine";
-import styled from "styled-components/macro";
-import { Menu } from "../menu/menu";
+import React, {useEffect, useState} from "react";
+import {HeaderLine} from "./HeaderLine";
+import styled from "styled-components";
+import {Menu} from "../menu/menu";
 
 export const Header = () => {
   const [menu, setMenu] = useState(false);
 
-  useEffect(() => {});
+  useEffect(() => {
+  });
 
   const menuHandler = () => {
     setMenu(!menu);
   };
 
   return (
-    <HeaderContainer>
-      <HeaderLine setMenu={menuHandler} />
-      {menu ? <Menu menuHandler={menuHandler} /> : null}
-    </HeaderContainer>
+      <HeaderContainer>
+        <HeaderLine setMenu={menuHandler}/>
+        {menu ? <Menu menuHandler={menuHandler}/> : null}
+      </HeaderContainer>
   );
 };
 
