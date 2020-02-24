@@ -6,6 +6,8 @@ import ProtectedRoute, {
 } from "./components/ProtectedRoutes";
 import { useSessionContext } from "./core/context/SessionContext";
 import { EventsPage } from "./components/EventsPage";
+import { Route } from "react-router";
+import { SignIn } from "./components/signin/SignIn";
 
 export const App = () => {
   const [sessionContext, updateSessionContext] = useSessionContext();
@@ -35,6 +37,7 @@ export const App = () => {
           path="/"
           component={EventsPage}
         />
+        <Route path="/login" component={SignIn} />
       </Content>
     </Main>
   );

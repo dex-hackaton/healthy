@@ -1,5 +1,4 @@
 import React from "react";
-import 'antd/dist/antd.css';
 import {Button, Modal, Icon, } from "antd";
 import styled from "styled-components/macro";
 import { iconsPaths } from "../../core/iconsPaths";
