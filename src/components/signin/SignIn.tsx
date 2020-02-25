@@ -178,5 +178,4 @@ const ModalBodyHeader = styled.p`
   font-size: 16px;
   margin: 0;
 `;
-
 const IconImage = styled.img``;

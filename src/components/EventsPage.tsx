@@ -1,19 +1,21 @@
 import React from "react";
-import { BootstrapContainer } from "./ui/BootstrapContainer";
+import {BootstrapContainer} from "./ui/BootstrapContainer";
+import {Filter} from "./filter/Filter";
 
 export const EventsPage = () => {
   return (
-    <BootstrapContainer>
-      <div>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, culpa
-        deleniti ducimus, earum et expedita explicabo id, illo ipsam itaque
-        minima quam sed vitae. Consequatur cupiditate doloribus enim iste
-        laboriosam nostrum sequi velit vitae. Accusantium ad adipisci aliquid
-        animi beatae, consectetur debitis dolorem earum, expedita fuga fugit id
-        inventore laborum neque nobis qui quo reprehenderit sint sit suscipit,
-        temporibus unde vel vero voluptate voluptates. Alias assumenda atque aut
-        beatae consequatur consequuntur cumque cupiditate dolore dolorem ducimus
-        ea eligendi et eum impedit iure iusto libero natus nemo non perferendis
+      <BootstrapContainer>
+        <Filter/>
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, culpa
+          deleniti ducimus, earum et expedita explicabo id, illo ipsam itaque
+          minima quam sed vitae. Consequatur cupiditate doloribus enim iste
+          laboriosam nostrum sequi velit vitae. Accusantium ad adipisci aliquid
+          animi beatae, consectetur debitis dolorem earum, expedita fuga fugit id
+          inventore laborum neque nobis qui quo reprehenderit sint sit suscipit,
+          temporibus unde vel vero voluptate voluptates. Alias assumenda atque aut
+          beatae consequatur consequuntur cumque cupiditate dolore dolorem ducimus
+          ea eligendi et eum impedit iure iusto libero natus nemo non perferendis
         placeat, quae quaerat quasi qui quidem quis quisquam recusandae
         repudiandae sapiente sequi sint tempore unde vel veniam veritatis
         voluptate voluptatum. Alias aliquam at, autem beatae commodi, culpa eius

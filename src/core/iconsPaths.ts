@@ -6,6 +6,8 @@ import logo from "../assets/icons/logo.svg";
 import vk from "../assets/icons/vk.svg";
 import facebook from "../assets/icons/facebook.svg";
 import mail from "../assets/icons/mail.svg";
+import settings from "../assets/icons/settings.svg";
+import arrow from "../assets/icons/arrow.svg";
 
 export const iconsPaths = {
   search,
@@ -15,5 +17,7 @@ export const iconsPaths = {
   logo,
   vk,
   facebook,
-  mail
+  mail,
+  settings,
+  arrow
 };
