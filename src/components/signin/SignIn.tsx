@@ -5,12 +5,9 @@ import {iconsPaths} from "../../core/iconsPaths";
 import {WrappedLoginForm} from "./LoginForm";
 import {WrappedRegistrationForm} from "./RegistrationForm";
 
-interface Props {
-    visible: boolean;
-}
 
-export const SignIn: React.FC<Props> = props => {
-    const {visible = false} = props;
+
+export const SignIn = () => {
     const renderLink = (): JSX.Element => {
         return (
             <a href={"#"}>
@@ -22,7 +19,7 @@ export const SignIn: React.FC<Props> = props => {
         <>
             <MainBlock>
                 <ModalBlock
-                    visible={false}
+                    visible={true}
                     title="Вход на портал"
                     onOk={() => {
                     }}
@@ -81,7 +78,7 @@ export const SignIn: React.FC<Props> = props => {
 
             <MainBlock>
                 <ModalBlock
-                    visible={true}
+                    visible={false}
                     title={renderLink()}
                     onOk={() => {
                     }}

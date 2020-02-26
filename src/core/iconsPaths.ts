@@ -9,6 +9,7 @@ import mail from "../assets/icons/mail.svg";
 import settings from "../assets/icons/settings.svg";
 import arrow from "../assets/icons/arrow.svg";
 import cross from "../assets/icons/cross.svg";
+import dollar from "../assets/icons/dollar.svg";
 
 export const iconsPaths = {
   search,
@@ -21,5 +22,6 @@ export const iconsPaths = {
   mail,
   settings,
   arrow,
-  cross
+  cross,
+  dollar
 };
