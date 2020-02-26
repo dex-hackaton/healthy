@@ -10,10 +10,12 @@ interface ISelected {
 
 export const Filter = () => {
   const [displayFull, setDisplayFull] = useState(false);
-  const [selected, setSelected] = useState<ISelected>({
-    date: ["1 апр 2020"],
-    names: ["велоспипед"]
-  });
+  const [selected, setSelected] = useState<ISelected>();
+
+  //{
+  //     date: ["1 апр 2020"],
+  //     names: ["велоспипед"]
+  //   }
 
   const displayHandler = () => {
     setDisplayFull(!displayFull);

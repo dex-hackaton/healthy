@@ -4,6 +4,7 @@ import {MenuLinks} from "../../core/menuLinks";
 import {Link, useLocation} from "react-router-dom";
 import {clearAllBodyScrollLocks, disableBodyScroll} from "body-scroll-lock";
 import {Button} from "antd";
+import {useOnClickOutside} from "../../core/hooks/useOnClickOutside";
 
 interface IProps {
     menuHandler: () => void;
@@ -16,6 +17,7 @@ export const Menu: FC<IProps> = ({menuHandler}) => {
         refElement.current && disableBodyScroll(refElement.current);
         return () => clearAllBodyScrollLocks();
     });
+    useOnClickOutside(refElement, () => menuHandler());
 
     return (
         <MenuContainer>
@@ -24,20 +26,22 @@ export const Menu: FC<IProps> = ({menuHandler}) => {
                     <MenuItemBlock
                         key={index + link.name}
                         onClick={menuHandler}
-            isActive={location.pathname === link.path}
-          >
-            <MenuItem to={link.path}>{link.name}</MenuItem>
-          </MenuItemBlock>
-        ))}
-        <MyButton type="primary">Создать мероприятие </MyButton>
-      </MenuItemsContainer>
-    </MenuContainer>
-  );
+                        isActive={location.pathname === link.path}
+                    >
+                        <MenuItem to={link.path}>{link.name}</MenuItem>
+                    </MenuItemBlock>
+                ))}
+                <MyButton type="primary">Создать мероприятие </MyButton>
+            </MenuItemsContainer>
+        </MenuContainer>
+    );
 };
 
 const MenuContainer = styled.div`
   width: 100%;
   position: relative;
+  height: calc(100vh - 50px);
+  background: rgba(38, 38, 38, 0.7);
 `;
 
 const MenuItemsContainer = styled.div`
