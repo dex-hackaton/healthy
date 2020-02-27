@@ -27,7 +27,7 @@ export class BaseRequest {
         throw response.json();
       }
 
-      return response;
+      return response.json();
     });
   }
 }

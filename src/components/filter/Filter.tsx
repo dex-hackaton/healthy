@@ -3,14 +3,16 @@ import styled from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
 import {FilterFull} from "./FilterFull";
 
-interface ISelected {
-  names: string[];
-  date: string[];
+export interface ISelected {
+  categories: string[];
+  startDate: any;
+  endDate: any;
+  free: boolean;
 }
 
 export const Filter = () => {
   const [displayFull, setDisplayFull] = useState(false);
-  const [selected, setSelected] = useState<ISelected>();
+  const [filter, setFilter] = useState<ISelected>({} as ISelected);
 
   //{
   //     date: ["1 апр 2020"],
@@ -24,15 +26,27 @@ export const Filter = () => {
   return (
       <>
         {displayFull ? (
-            <FilterFull/>
+            <FilterFull
+                filter={filter}
+                setFilter={setFilter}
+                displayHandler={displayHandler}
+            />
         ) : (
             <MainBlock onClick={displayHandler}>
               <LeftBlock>
                 <SettingsIcon src={iconsPaths.settings}/>
-                {selected ? (
+                {filter.startDate || filter.categories || filter.free ? (
                     <Label>
-                      Выбрано:{`${selected?.names[0]},`}
-                      <a> {`${selected?.date[0]}`} </a>
+                      Выбрано:
+                      {`${filter?.startDate ||
+                      filter.categories[0] ||
+                      (filter.free && "Бесплатные")},`}
+                      <a>
+                        {" "}
+                        {`${filter?.startDate ||
+                        filter.categories[0] ||
+                        (filter.free && "Бесплатные")}`}{" "}
+                      </a>
                     </Label>
                 ) : (
                     <Label>Уточнить поиск</Label>

@@ -1,42 +1,118 @@
-import React, {useEffect} from "react";
+import React, {createRef, FC, useEffect, useState} from "react";
 import styled from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
-import {Checkbox, Col} from "antd";
-import {useDispatch} from "react-redux";
+import {Button, Checkbox, DatePicker} from "antd";
+import {useDispatch, useSelector} from "react-redux";
 import {MainActionsAsync} from "../../redux/main/MainActionsAsync";
+import {getCategories} from "../../redux/main/MainSelector";
+import {ISelected} from "./Filter";
+import {CheckboxValueType} from "antd/es/checkbox/Group";
+import {clearAllBodyScrollLocks, disableBodyScroll} from "body-scroll-lock";
 
-export const FilterFull = () => {
+interface IProps {
+  filter: ISelected;
+  setFilter: (val: ISelected) => void;
+  displayHandler: () => void;
+}
+
+export const FilterFull: FC<IProps> = ({
+                                         filter,
+                                         setFilter,
+                                         displayHandler
+                                       }) => {
   const dispatch = useDispatch();
+  const categories = useSelector(getCategories);
+  const [startDate, setStartDate] = useState(filter.startDate);
+  const [endDate, setEndDate] = useState(filter.endDate);
+  const [free, setIsFree] = useState(filter.free);
+  const [checkedCategories, setCheckedCategories] = useState<CheckboxValueType[]>(filter.categories || []);
+
+  const refElement = createRef<HTMLDivElement>();
+  useEffect(() => {
+    refElement.current && disableBodyScroll(refElement.current);
+    return () => clearAllBodyScrollLocks();
+  });
+
+  const setFilterHandler = () => {
+    setFilter({
+      startDate,
+      endDate,
+      free,
+      categories: checkedCategories as string[]
+    });
+  };
 
   useEffect(() => {
     dispatch(MainActionsAsync.getCategories());
   }, []);
 
+  const setCategoriesHandle = (val: CheckboxValueType[]) => {
+    if (val.includes("")) setCheckedCategories([""]);
+    else {
+      setCheckedCategories(val);
+    }
+  };
+
+  const applyFilter = () => {
+    setFilterHandler();
+    displayHandler();
+  };
+
   return (
-      <MainContainer>
-        <CrossIcon src={iconsPaths.cross} alt=""/>
+      <MainContainer ref={refElement}>
+        <CrossIcon src={iconsPaths.cross} alt="" onClick={displayHandler}/>
         <WhiteContainer>
           <MainBlock>
             <HeadLabel>Уточнить поиск</HeadLabel>
             <SimpleLabel>Категории:</SimpleLabel>
             <Checkbox.Group
                 style={{width: "100%"}}
-                onChange={val => console.log("val", val)}
+                value={checkedCategories}
+                onChange={setCategoriesHandle}
             >
               <CheckBoxListBlock>
-                <Col span={12}>
-                  <CheckBoxBlock>
-                    <Checkbox value="A"/>
+                <CheckBoxBlock>
+                  <Checkbox value="" checked={checkedCategories.includes("")}/>
+                  <AllCategoriesName>Все категории</AllCategoriesName>
+                </CheckBoxBlock>
+                {categories &&
+                categories.map(item => (
+                    <CheckBoxBlock key={item.id}>
+                      <Checkbox
+                          value={item.id}
+                          disabled={checkedCategories[0] === ""}
+                      />
 
-                    <MyIcon src={iconsPaths.cross}/>
-                    <span> A</span>
-                  </CheckBoxBlock>
-                </Col>
-                <Col span={12}>
-                  <Checkbox value="B">B</Checkbox>
-                </Col>
+                      <MyIcon src={`/categories/${item.id}.svg`}/>
+                      <SimpleLabel>{item.name}</SimpleLabel>
+                    </CheckBoxBlock>
+                ))}
               </CheckBoxListBlock>
             </Checkbox.Group>
+            <DateBlock>
+              <SimpleLabel>Показать в период:</SimpleLabel>
+              <DatePicker
+                  placeholder="C"
+                  value={startDate}
+                  onChange={date => date && setStartDate(date)}
+              />
+              <DatePicker
+                  placeholder="До"
+                  value={endDate}
+                  onChange={date => date && setEndDate(date)}
+              />
+            </DateBlock>
+            <ButtonBlock>
+              <Checkbox
+                  checked={free}
+                  onChange={e => setIsFree(e.target.checked)}
+              >
+                Не показывать мероприятия с платными услугами
+              </Checkbox>
+              <MyGrayButton onClick={applyFilter}>
+                Применить настройки
+              </MyGrayButton>
+            </ButtonBlock>
           </MainBlock>
         </WhiteContainer>
       </MainContainer>
@@ -45,9 +121,11 @@ export const FilterFull = () => {
 
 const MainContainer = styled.div`
   position: absolute;
-  width: 100%;
+  width: calc(100vw - 30px);
   top: 13px;
   left: 15px;
+  right: 15px;
+
   z-index: 20;
 `;
 
@@ -82,11 +160,12 @@ const SimpleLabel = styled.p`
   font-weight: normal;
   font-size: 14px;
   line-height: 22px;
+  white-space: nowrap;
 `;
 
 const CheckBoxListBlock = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto auto;
 `;
 
 const CheckBoxBlock = styled.div`
@@ -94,4 +173,47 @@ const CheckBoxBlock = styled.div`
   align-items: center;
 `;
 
-const MyIcon = styled.img``;
+const MyIcon = styled.img`
+  margin-left: 16px;
+  margin-right: 10px;
+`;
+
+const AllCategoriesName = styled.span`
+  white-space: nowrap;
+  margin-left: 16px;
+`;
+
+const DateBlock = styled.div`
+  display: flex;
+  flex-flow: column;
+
+  > :first-child {
+    margin-bottom: 8px;
+  }
+
+  > :nth-child(2) {
+    margin-bottom: 8px;
+  }
+`;
+
+const ButtonBlock = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin-top: 24px;
+  margin-bottom: 150px;
+
+  > :first-child {
+    margin-bottom: 24px;
+    white-space: nowrap;
+    font-family: SF Pro Display, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+  }
+`;
+
+const MyGrayButton = styled(Button)`
+  width: 191px;
+  height: 40px;
+`;
