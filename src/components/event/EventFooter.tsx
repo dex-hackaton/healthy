@@ -16,14 +16,18 @@ export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
     return (
         <BootstrapContainer>
             <MainBlock>
-                <img src={type.id} alt={type.id}/>
-                <span>{type.name}</span>
-                <Button block size={"large"}>
-                   { isCheck ? "Покинуть" : "Вступить" }
-                </Button>
-                <Button block size={"large"}>
-                    <Icon type="message" />
-                </Button>
+                <div>
+                    <MyIcon src={`/categories/${type.id}.svg`}/>
+                    <span>{type.name}</span>
+                </div>
+                <div>
+                    <BlueButton size={"large"} isGo={isCheck}>
+                       { isCheck ? "Покинуть" : "Вступить" }
+                    </BlueButton>
+                    <Button size={"large"}>
+                        <Icon type="message" />
+                    </Button>
+                </div>
             </MainBlock>
         </BootstrapContainer>
     );
@@ -32,4 +36,22 @@ export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
 const MainBlock = styled.div`
     color: #595959;
     font-family: SF Pro Display;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    button + button {
+        margin-left: 21px;
+        border-radius: 50%;
+        padding: 0 11px;
+    }
 `;
+const MyIcon = styled.img`
+  margin-left: 16px;
+  margin-right: 10px;
+`;
+
+const BlueButton = styled(Button)<{ isGo: boolean }>`
+     background-color: ${props => (props.isGo ? "transparent" : "#BAE7FF")};
+`;
+

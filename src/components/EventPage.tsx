@@ -1,9 +1,21 @@
 import React from "react";
 import {Event} from "./event/Event";
+import {EventCard} from "./event/EventCard";
 
 export const EventPage = () => {
   return (
       <div>
+          <EventCard
+              title={"Обучение плаванию"}
+              isPay={true}
+              date={"23  фев 2020"}
+              location={"Тирасполь, Центр"}
+              description={
+                           "Провожу занятия по плаванию.\n" +
+                           "Обучаю таким видам как баттерфляй, брасс, кроль на груди (вольный стиль).\n" +
+                           "Если вы любите спорт, занимаетесь спортом профессионально, вы знаете, что для развития спортсмену необходим профессиональный тренер." }
+              isLiked={true}/>
+
         <Event
             title={"Обучение плаванию"}
             isPay={true}
