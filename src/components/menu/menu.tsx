@@ -4,7 +4,6 @@ import {MenuLinks} from "../../core/menuLinks";
 import {Link, useLocation} from "react-router-dom";
 import {clearAllBodyScrollLocks, disableBodyScroll} from "body-scroll-lock";
 import {Button} from "antd";
-import {useOnClickOutside} from "../../core/hooks/useOnClickOutside";
 
 interface IProps {
     menuHandler: () => void;
@@ -13,44 +12,52 @@ interface IProps {
 export const Menu: FC<IProps> = ({menuHandler}) => {
     const location = useLocation();
     const refElement = createRef<HTMLDivElement>();
+
     useEffect(() => {
         refElement.current && disableBodyScroll(refElement.current);
         return () => clearAllBodyScrollLocks();
     });
-    useOnClickOutside(refElement, () => menuHandler());
 
     return (
-        <MenuContainer>
-            <MenuItemsContainer ref={refElement}>
-                {MenuLinks.map((link, index) => (
-                    <MenuItemBlock
-                        key={index + link.name}
-                        onClick={menuHandler}
-                        isActive={location.pathname === link.path}
-                    >
-                        <MenuItem to={link.path}>{link.name}</MenuItem>
-                    </MenuItemBlock>
-                ))}
-                <MyButton type="primary">Создать мероприятие </MyButton>
-            </MenuItemsContainer>
+        <MenuContainer ref={refElement}>
+            <Contained onClick={menuHandler}>
+                <MenuItemsContainer onClick={e => e.stopPropagation()}>
+                    {MenuLinks.map((link, index) => (
+                        <MenuItemBlock
+                            key={index + link.name}
+                            onClick={menuHandler}
+                            isActive={location.pathname === link.path}
+                        >
+                            <MenuItem to={link.path}>{link.name}</MenuItem>
+                        </MenuItemBlock>
+                    ))}
+                    <MyButton type="primary">Создать мероприятие </MyButton>
+                </MenuItemsContainer>
+            </Contained>
         </MenuContainer>
     );
 };
 
 const MenuContainer = styled.div`
-  width: 100%;
   position: relative;
-  height: calc(100vh - 50px);
+`;
+
+const Contained = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
   background: rgba(38, 38, 38, 0.7);
+
+  position: absolute;
+  top: 13px;
+  left: -15px;
 `;
 
 const MenuItemsContainer = styled.div`
-  width: 80%;
-  height: calc(100vh - 50px);
   background: #f5f5f5;
-  position: absolute;
-  top: 0;
-  left: 0;
+  width: 80vw;
+
+  height: 100vh;
 `;
 
 const MenuItemBlock = styled.div<{ isActive: boolean }>`

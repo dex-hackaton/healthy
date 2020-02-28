@@ -84,7 +84,7 @@ export const FilterFull: FC<IProps> = ({
                       />
 
                       <MyIcon src={`/categories/${item.id}.svg`}/>
-                      <SimpleLabel>{item.name}</SimpleLabel>
+                      <CategorieLabel>{item.name}</CategorieLabel>
                     </CheckBoxBlock>
                 ))}
               </CheckBoxListBlock>
@@ -163,9 +163,20 @@ const SimpleLabel = styled.p`
   white-space: nowrap;
 `;
 
+const CategorieLabel = styled.p`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+
+  margin-bottom: 0;
+`;
+
 const CheckBoxListBlock = styled.div`
   display: grid;
   grid-template-columns: auto auto;
+  grid-row-gap: 8px;
 `;
 
 const CheckBoxBlock = styled.div`
@@ -186,6 +197,7 @@ const AllCategoriesName = styled.span`
 const DateBlock = styled.div`
   display: flex;
   flex-flow: column;
+  margin-top: 24px;
 
   > :first-child {
     margin-bottom: 8px;

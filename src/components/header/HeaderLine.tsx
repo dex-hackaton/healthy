@@ -2,18 +2,24 @@ import React, {FC} from "react";
 import {BootstrapContainer} from "../ui/BootstrapContainer";
 import styled from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
+import {Menu} from "../menu/menu";
 
 interface IProps {
   setMenu: () => void;
+  menu: boolean;
+  closeMenu: () => void;
 }
 
-export const HeaderLine: FC<IProps> = ({setMenu}) => {
+export const HeaderLine: FC<IProps> = ({setMenu, menu, closeMenu}) => {
   return (
       <HeadBlock>
         <BootstrapContainer>
           <MainBlock>
             <LeftBlock>
-              <IconImage onClick={setMenu} src={iconsPaths.menu} alt=""/>
+              <ImageBlock>
+                <IconImage onClick={setMenu} src={iconsPaths.menu} alt=""/>
+                {menu ? <Menu menuHandler={closeMenu}/> : null}
+              </ImageBlock>
               <IconImage src={iconsPaths.logo} alt=""/>
             </LeftBlock>
             <RightBlock>
@@ -22,8 +28,8 @@ export const HeaderLine: FC<IProps> = ({setMenu}) => {
               <IconImage src={iconsPaths.profile} alt=""/>
             </RightBlock>
           </MainBlock>
-      </BootstrapContainer>
-    </HeadBlock>
+        </BootstrapContainer>
+      </HeadBlock>
   );
 };
 
@@ -56,3 +62,5 @@ const RightBlock = styled.div`
 `;
 
 const IconImage = styled.img``;
+
+const ImageBlock = styled.div``;

@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {HeaderLine} from "./HeaderLine";
 import styled from "styled-components";
-import {Menu} from "../menu/menu";
 
 export const Header = () => {
   const [menu, setMenu] = useState(false);
 
-  useEffect(() => {
-  });
+  const closeMenu = () => {
+    setMenu(false);
+  };
 
   const menuHandler = () => {
     setMenu(!menu);
@@ -15,8 +15,7 @@ export const Header = () => {
 
   return (
       <HeaderContainer>
-        <HeaderLine setMenu={menuHandler}/>
-        {menu ? <Menu menuHandler={menuHandler}/> : null}
+        <HeaderLine setMenu={menuHandler} menu={menu} closeMenu={closeMenu}/>
       </HeaderContainer>
   );
 };
