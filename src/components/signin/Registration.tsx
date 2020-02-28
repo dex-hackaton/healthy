@@ -1,16 +1,24 @@
 import React from "react";
-import {Button, Modal} from "antd";
+import { Icon, Modal} from "antd";
 import styled from "styled-components/macro";
-import {iconsPaths} from "../../core/iconsPaths";
+import {WrappedRegistrationForm} from "./RegistrationForm";
 
 
 
-export const SignIn = () => {
+export const Registration = () => {
+    const renderLink = (): JSX.Element => {
+        return (
+            <a href={"#"}>
+                <Icon type="left"/> На главную
+            </a>
+        );
+    };
     return (
+
             <MainBlock>
                 <ModalBlock
                     visible={true}
-                    title="Вход на портал"
+                    title={renderLink()}
                     onOk={() => {
                     }}
                     onCancel={() => {
@@ -23,22 +31,16 @@ export const SignIn = () => {
                         </p>
                     }
                 >
-                    <Buttons>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.vk} alt=""/>
-                            Vkontakte
-                        </Button>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.facebook} alt=""/>
-                            Facebook
-                        </Button>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.mail} alt=""/>
-                            Через почту
-                        </Button>
-                    </Buttons>
+                    <div>
+                        <ModalBodyHeader>Регистрация через почту</ModalBodyHeader>
+                        <ModalBodyText>
+                            или <a href={"#"}>войти в аккаунт</a>
+                        </ModalBodyText>
+                    </div>
+                    <WrappedRegistrationForm/>
                 </ModalBlock>
             </MainBlock>
+
     );
 };
 
@@ -77,26 +79,17 @@ const ModalBlock = styled(Modal)`
     color: #1c8efb;
   }
 `;
-const Buttons = styled.div`
-  > button {
-    margin-bottom: 12px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    > span {
-      font-family: "SF Pro Display", serif;
-      font-weight: 600;
-      font-size: 17px;
-      line-height: 22px;
-      text-align: center;
-      letter-spacing: -0.41px;
-      color: #595959;
-    }
-    > img {
-      position: absolute;
-      left: 16px;
-    }
-  }
+
+const ModalBodyText = styled.p`
+  font-family: SF Pro Display, serif;
+  font-size: 14px;
+  line-height: 22px;
+  color: #595959;
 `;
-const IconImage = styled.img``;
+const ModalBodyHeader = styled.p`
+  font-family: SF Pro Display, serif;
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 16px;
+  margin: 0;
+`;

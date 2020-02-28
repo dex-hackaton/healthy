@@ -5,6 +5,7 @@ import ProtectedRoute, {ProtectedRouteProps} from "./components/ProtectedRoutes"
 import {useSessionContext} from "./core/context/SessionContext";
 import {Route} from "react-router";
 import {SignIn} from "./components/signin/SignIn";
+import {Registration} from "./components/signin/Registration";
 import {EventPage} from "./components/EventPage";
 import {MainPage} from "./components/MainPage";
 
@@ -37,6 +38,7 @@ export const App = () => {
           <EventPage/>
         </ProtectedRoute>
         <Route path="/login" component={SignIn}/>
+        <Route path="/registration" component={Registration}/>
       </Content>
     </Main>
   );

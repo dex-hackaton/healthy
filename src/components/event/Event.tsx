@@ -1,10 +1,11 @@
-import React from "react";
+import React, {createRef, useState} from "react";
 import {BootstrapContainer} from "../ui/BootstrapContainer"
 import styled, {css} from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
 import { Icon } from "antd";
 import {Link} from "react-router-dom";
 import {EventFooter} from "./EventFooter";
+import {useOnClickOutside} from "../../core/hooks/useOnClickOutside";
 
 interface Member {
     photo: string,
@@ -20,10 +21,15 @@ interface Props {
     description: string,
     organisation: string,
     service: string,
-    members: Member[],
+    members: Member[]
 }
 
 export const Event: React.FC<Props> = ({title, isPay, date, location, description, organisation, service, members}) => {
+
+    let [showMenu, setShowMenu] = useState(false);
+    const refElement = createRef<HTMLDivElement>();
+    useOnClickOutside(refElement, () => setShowMenu(false));
+
     const countMemberText = (count: number): string => {
         let temp: string = "";
         switch (count%10) {
@@ -46,13 +52,20 @@ export const Event: React.FC<Props> = ({title, isPay, date, location, descriptio
                 <EventHeader>
                     <HeaderTitle isPay={isPay}>
                         {title}
+                        <MenuBlock ref={refElement}>
+                            <Icon type="more" onClick={() => setShowMenu(true)}/>
+                            <MenuBlockItems isShown={showMenu}>
+                                <MenuBlockItem>Поделиться</MenuBlockItem>
+                                <MenuBlockItem>Пожаловаться</MenuBlockItem>
+                            </MenuBlockItems>
+                        </MenuBlock>
                     </HeaderTitle>
                     <HeaderInfo>
                         <Icon type="calendar" />{date}
                         <Icon type="environment" />{location}
                     </HeaderInfo>
                 </EventHeader>
-                <EvenBody>
+                <EventBody>
                     <EvenBodyBlock>
                         <BodyHeader>Описание</BodyHeader>
                         <BodyText>{description}</BodyText>
@@ -62,10 +75,10 @@ export const Event: React.FC<Props> = ({title, isPay, date, location, descriptio
                         <BodyText>{organisation}</BodyText>
                     </EvenBodyBlock>
                     {isPay &&
-                        <EvenBodyBlock>
-                            <BodyHeader>Платные услуги</BodyHeader>
-                            <BodyText>{service}</BodyText>
-                        </EvenBodyBlock>
+                    <EvenBodyBlock>
+                        <BodyHeader>Платные услуги</BodyHeader>
+                        <BodyText>{service}</BodyText>
+                    </EvenBodyBlock>
                     }
                     <EvenBodyBlock>
                         <BodyHeader>Участники</BodyHeader>
@@ -77,17 +90,18 @@ export const Event: React.FC<Props> = ({title, isPay, date, location, descriptio
                             members.map((item: Member) => {
                                 return (
                                     <MemberItem key={item.name}>
-                                    <img src={item.photo} alt={item.name} />
+                                        <img src={item.photo} alt={item.name}/>
                                         <p>{item.name}</p>
                                     </MemberItem>
                                 )
                             })
                         }
                     </EvenBodyBlock>
-                </EvenBody>
+                </EventBody>
             </>
         </BootstrapContainer>
-        <EventFooter type={{id: "swimming", name: "Плавание"}} isCheck={false}/>
+                <Line/>
+        <EventFooter type={{id: "swimming", name: "Плавание"}} isCheck={true}/>
         </MainBlock>
     );
 };
@@ -134,7 +148,7 @@ const HeaderInfo = styled.span`
     }
 `;
 
-const EvenBody = styled.div`
+const EventBody = styled.div`
 `;
 
 const BodyHeader = styled.p`      
@@ -154,6 +168,9 @@ const BodyText = styled.p`
 const EvenBodyBlock = styled.div`
     border-bottom: 1px solid #F0F0F0;
     margin-bottom: 16px;
+    &:last-of-type {
+    border: none;
+    }
 `;
 
 const MembersBlock = styled.div`
@@ -175,3 +192,40 @@ const MemberItem = styled.div`
         margin-bottom: 0;
     }
 `;
+
+const Line = styled.hr`
+    border-color: #D9D9D9;    
+`;
+const MenuBlock = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
+`;
+const MenuBlockItems = styled.ul<{isShown: boolean}>`
+    position: absolute;
+    left: -100px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;   
+    list-style-type: none;
+    padding: 0;
+    padding: 10px 0;
+    opacity: ${props => props.isShown ? 1 : 0};
+    transition: opacity .3s;
+`;
+
+const MenuBlockItem = styled.li`
+    font-size: 14px;
+    line-height: 22px;  
+    color: #595959;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 0 12px;
+    &:last-of-type {
+        margin-bottom: 0px;
+    }
+    &:hover {
+        background-color: #CCC;
+    }
+`;
+
