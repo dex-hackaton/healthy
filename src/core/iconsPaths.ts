@@ -11,6 +11,8 @@ import arrow from "../assets/icons/arrow.svg";
 import cross from "../assets/icons/cross.svg";
 import dollar from "../assets/icons/dollar.svg";
 
+import userPic from "../assets/icons/userLogo.png";
+
 export const iconsPaths = {
   search,
   notification,
@@ -23,5 +25,6 @@ export const iconsPaths = {
   settings,
   arrow,
   cross,
-  dollar
+  dollar,
+  userPic
 };

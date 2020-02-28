@@ -7,6 +7,8 @@ import {Route} from "react-router";
 import {SignIn} from "./components/signin/SignIn";
 import {EventPage} from "./components/EventPage";
 import {MainPage} from "./components/MainPage";
+import {Profile} from "./components/profile/Profile";
+import {iconsPaths} from "./core/iconsPaths";
 
 export const App = () => {
   const [sessionContext, updateSessionContext] = useSessionContext();
@@ -35,6 +37,10 @@ export const App = () => {
         </ProtectedRoute>
         <ProtectedRoute {...defaultProtectedRouteProps} path="/event">
           <EventPage/>
+        </ProtectedRoute>
+
+        <ProtectedRoute {...defaultProtectedRouteProps} path="/profile">
+          <Profile userImage={iconsPaths.userPic} userName="Вадим Зожный"/>
         </ProtectedRoute>
         <Route path="/login" component={SignIn}/>
       </Content>
