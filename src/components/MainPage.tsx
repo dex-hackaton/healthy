@@ -20,20 +20,15 @@ export const MainPage = () => {
   return (
     <BootstrapContainer>
       <Filter />
-      <GrayLine />
+
       {events.map(event => (
         <React.Fragment key={event.id}>
           <EventCard {...event} />
-          <GrayLine />
+
         </React.Fragment>
       ))}
     </BootstrapContainer>
   );
 };
 
-const GrayLine = styled.div`
-  width: 100vw;
-  height: 16px;
-  background: #e5e5e5;
-  margin-left: -15px;
-`;
+
