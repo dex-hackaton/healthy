@@ -48,7 +48,7 @@ export const SignIn = () => {
             <IconImage src={iconsPaths.facebook} alt="" />
             Facebook
           </Button>
-          <Button block size={"large"}>
+          <Button block size={"large"} onClick={ () => window.location.replace("https://api.healthy.adds.md/login/google") }>
             <IconImage src={iconsPaths.mail} alt="" />
             Через почту
           </Button>

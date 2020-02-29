@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
+
     return (
         <BootstrapContainer>
             <MainBlock>
