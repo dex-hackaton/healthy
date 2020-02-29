@@ -4,6 +4,8 @@ import {iconsPaths} from "../../core/iconsPaths";
 import {FilterFull} from "./FilterFull";
 import {useSelector} from "react-redux";
 import {getFilter} from "../../redux/main/MainSelector";
+import {format} from "date-fns";
+import moment from "moment";
 
 export interface ISelected {
   categories: string[];

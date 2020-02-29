@@ -9,6 +9,7 @@ import { ISelected } from "./Filter";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 import { MainActions } from "../../redux/main/MainActions";
+import moment from "moment";
 
 interface IProps {
   filter: ISelected;
@@ -34,8 +35,8 @@ export const FilterFull: FC<IProps> = ({ filter, displayHandler }) => {
   const setFilterHandler = () => {
     dispatch(
       MainActions.setFilter({
-        startDate,
-        endDate,
+        startDate: moment(startDate).format("D MMM YYYY"),
+        endDate: moment(startDate).format("D MMM YYYY"),
         free,
         categories: checkedCategories as string[]
       })
@@ -94,7 +95,9 @@ export const FilterFull: FC<IProps> = ({ filter, displayHandler }) => {
             <DatePicker
               placeholder="C"
               value={startDate}
-              onChange={date => date && setStartDate(date)}
+              onChange={date =>
+                date && setStartDate(date)
+              }
             />
             <DatePicker
               placeholder="До"

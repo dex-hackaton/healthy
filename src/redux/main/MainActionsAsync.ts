@@ -10,9 +10,9 @@ export const MainActionsAsync = {
       requestsRepository.mainApiRequest.categories,
       MainActions.getCategories
     ),
-  getEvents: (): SimpleThunk =>
+  getEvents: (params: string[]=[]): SimpleThunk =>
     baseThunkAction(
-      [],
+      params,
       requestsRepository.mainApiRequest.events,
       MainActions.getEvents
     )
