@@ -17,5 +17,5 @@ export const MainReducer = reducerWithInitialState(MainInitialState)
   }))
   .case(MainActions.getEvent.done, (state, { result }) => ({
     ...state,
-    SelectedEvent: result
+    SelectedEvent: result[0]
   }));
