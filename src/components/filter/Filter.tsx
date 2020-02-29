@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
 import {FilterFull} from "./FilterFull";
+import {useSelector} from "react-redux";
+import {getFilter} from "../../redux/main/MainSelector";
 
 export interface ISelected {
   categories: string[];
@@ -12,12 +14,8 @@ export interface ISelected {
 
 export const Filter = () => {
   const [displayFull, setDisplayFull] = useState(false);
-  const [filter, setFilter] = useState<ISelected>({} as ISelected);
+  const filter = useSelector(getFilter);
 
-  //{
-  //     date: ["1 апр 2020"],
-  //     names: ["велоспипед"]
-  //   }
 
   const displayHandler = () => {
     setDisplayFull(!displayFull);
@@ -28,7 +26,6 @@ export const Filter = () => {
         {displayFull ? (
             <FilterFull
                 filter={filter}
-                setFilter={setFilter}
                 displayHandler={displayHandler}
             />
         ) : (

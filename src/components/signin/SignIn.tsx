@@ -1,45 +1,61 @@
-import React from "react";
-import {Button, Modal} from "antd";
+import React, { useEffect } from "react";
+import { Button, Modal } from "antd";
 import styled from "styled-components/macro";
-import {iconsPaths} from "../../core/iconsPaths";
-
-
+import { iconsPaths } from "../../core/iconsPaths";
+import { useHistory, useParams } from "react-router";
+import { BaseRequest } from "../../api/BaseRequest";
+import { useSessionContext } from "../../core/context/SessionContext";
 
 export const SignIn = () => {
-    return (
-            <MainBlock>
-                <ModalBlock
-                    visible={true}
-                    title="Вход на портал"
-                    onOk={() => {
-                    }}
-                    onCancel={() => {
-                    }}
-                    footer={
-                        <p>
-                            Авторизуясь, вы соглашаетесь с{" "}
-                            <a href={"#"}>правилами пользования сайтом</a> и даете{" "}
-                            <a href={"#"}>согласие на обработку персональных данных.</a>
-                        </p>
-                    }
-                >
-                    <Buttons>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.vk} alt=""/>
-                            Vkontakte
-                        </Button>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.facebook} alt=""/>
-                            Facebook
-                        </Button>
-                        <Button block size={"large"}>
-                            <IconImage src={iconsPaths.mail} alt=""/>
-                            Через почту
-                        </Button>
-                    </Buttons>
-                </ModalBlock>
-            </MainBlock>
-    );
+  const { token } = useParams();
+  const history = useHistory();
+  const [sessionContext, updateSessionContext] = useSessionContext();
+
+  useEffect(() => {
+    if (typeof token !== "undefined") {
+      console.log("it true");
+      BaseRequest.setToken(token);
+      updateSessionContext({
+        isAuthenticated: true
+      });
+      history.push("/");
+    } else if (sessionContext.isAuthenticated) {
+      history.push("/");
+    }
+  });
+
+  return (
+    <MainBlock>
+      <ModalBlock
+        visible={true}
+        title="Вход на портал"
+        onOk={() => {}}
+        onCancel={() => {}}
+        footer={
+          <p>
+            Авторизуясь, вы соглашаетесь с{" "}
+            <a href={"#"}>правилами пользования сайтом</a> и даете{" "}
+            <a href={"#"}>согласие на обработку персональных данных.</a>
+          </p>
+        }
+      >
+        <Buttons>
+          <Button block size={"large"}>
+            <IconImage src={iconsPaths.vk} alt="" />
+            Vkontakte
+          </Button>
+          <Button block size={"large"}>
+            <IconImage src={iconsPaths.facebook} alt="" />
+            Facebook
+          </Button>
+          <Button block size={"large"}>
+            <IconImage src={iconsPaths.mail} alt="" />
+            Через почту
+          </Button>
+        </Buttons>
+      </ModalBlock>
+    </MainBlock>
+  );
 };
 
 const MainBlock = styled.div`

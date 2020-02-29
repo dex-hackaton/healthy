@@ -25,6 +25,7 @@ export const baseThunkAction = <P extends any[], R>(
     const result = await request.bind(new BaseRequest())(...params);
     if (result.status >= 400) {
       dispatch(action.failed({params, error: result as Error}));
+      localStorage.clear();
     } else {
       dispatch(action.done({params, result}));
     }

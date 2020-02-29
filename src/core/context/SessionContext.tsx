@@ -2,11 +2,13 @@ import { createContext, useContext, useState } from "react";
 import React from "react";
 
 export interface Session {
-  isAuthenticated?: boolean;
+  isAuthenticated: boolean;
   redirectPathOnAuthentication?: string;
 }
 
-export const initialSession: Session = {};
+export const initialSession: Session = {
+  isAuthenticated: !!localStorage.getItem("token")
+};
 
 export const SessionContext = createContext<
   [Session, (session: Session) => void]

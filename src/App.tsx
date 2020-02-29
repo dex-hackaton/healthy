@@ -1,15 +1,13 @@
 import React from "react";
-import {Header} from "./components/header/Header";
+import { Header } from "./components/header/Header";
 import styled from "styled-components/macro";
-import ProtectedRoute, {ProtectedRouteProps} from "./components/ProtectedRoutes";
-import {useSessionContext} from "./core/context/SessionContext";
-import {Route} from "react-router";
-import {SignIn} from "./components/signin/SignIn";
-import {Registration} from "./components/signin/Registration";
-import {EventPage} from "./components/EventPage";
-import {MainPage} from "./components/MainPage";
-import {Profile} from "./components/profile/Profile";
-import {iconsPaths} from "./core/iconsPaths";
+import ProtectedRoute, {
+  ProtectedRouteProps
+} from "./components/ProtectedRoutes";
+import { useSessionContext } from "./core/context/SessionContext";
+import { Route, Switch } from "react-router";
+import { SignIn } from "./components/signin/SignIn";
+import { MainPage } from "./components/MainPage";
 
 export const App = () => {
   const [sessionContext, updateSessionContext] = useSessionContext();
@@ -21,36 +19,32 @@ export const App = () => {
     });
   };
 
+  console.log("sessionContext.isAuthenticated", sessionContext.isAuthenticated);
+
   const defaultProtectedRouteProps: ProtectedRouteProps = {
-    isAuthenticated: true, //!!sessionContext.isAuthenticated
+    isAuthenticated: sessionContext.isAuthenticated,
     authenticationPath: "/login",
     redirectPathOnAuthentication:
-      sessionContext.redirectPathOnAuthentication || "/",
+      sessionContext.redirectPathOnAuthentication || "",
     setRedirectPathOnAuthentication
   };
 
   return (
     <Main className="App">
-      <Header/>
+      <Header />
       <Content>
-        <ProtectedRoute {...defaultProtectedRouteProps} exact={true} path="/">
-          <MainPage/>
-        </ProtectedRoute>
-        <ProtectedRoute {...defaultProtectedRouteProps} path="/event">
-          <EventPage/>
-        </ProtectedRoute>
-
-        <ProtectedRoute {...defaultProtectedRouteProps} path="/profile">
-          <Profile
-              userImage={iconsPaths.userPic}
-              userName="Вадим Зожный"
-              weight={80}
-              height={177}
-              age={30}
+        <Switch>
+          <ProtectedRoute
+            {...defaultProtectedRouteProps}
+            redirectPathOnAuthentication="/"
+            exact
+            path="/"
+            component={MainPage}
           />
-        </ProtectedRoute>
-        <Route path="/login" component={SignIn}/>
-        <Route path="/registration" component={Registration}/>
+
+          <Route path="/login/:token" component={SignIn} />
+          <Route path="/login/" component={SignIn} />
+        </Switch>
       </Content>
     </Main>
   );
