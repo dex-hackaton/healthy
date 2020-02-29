@@ -13,7 +13,8 @@ export const EventCard: React.FC<IEvent> = ({
   start_time,
   description,
   like,
-  place
+  place,
+  id
 }) => {
   let [showFull, setShowFull] = useState(false);
 
@@ -63,6 +64,7 @@ export const EventCard: React.FC<IEvent> = ({
         <EventBody>{renderDescription()}</EventBody>
       </BootstrapContainer>
       <EventFooter
+        id={id}
         type={{ id: "swimming", name: "Плавание" }}
         isCheck={false}
       />

@@ -14,4 +14,8 @@ export const MainReducer = reducerWithInitialState(MainInitialState)
   .case(MainActions.getEvents.done, (state, { result }) => ({
     ...state,
     EventsArr: [...result]
+  }))
+  .case(MainActions.getEvent.done, (state, { result }) => ({
+    ...state,
+    SelectedEvent: result
   }));

@@ -15,5 +15,11 @@ export const MainActionsAsync = {
       params,
       requestsRepository.mainApiRequest.events,
       MainActions.getEvents
+    ),
+  getEvent: (params: string[]=[]): SimpleThunk =>
+    baseThunkAction(
+      params,
+      requestsRepository.mainApiRequest.event,
+      MainActions.getEvent
     )
 };

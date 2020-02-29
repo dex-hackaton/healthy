@@ -2,6 +2,7 @@ import React from "react";
 import {BootstrapContainer} from "../ui/BootstrapContainer"
 import styled from "styled-components";
 import {Button, Icon } from "antd";
+import {useHistory} from "react-router";
 
 interface Type {
     id: string,
@@ -9,10 +10,13 @@ interface Type {
 }
 interface Props {
     type: Type,
-    isCheck: boolean
+    isCheck: boolean,
+    id: string
 }
 
-export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
+export const EventFooter: React.FC<Props> = ({type, isCheck,id}) => {
+    const history = useHistory();
+
     return (
         <BootstrapContainer>
             <MainBlock>
@@ -21,7 +25,7 @@ export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
                     <span>{type.name}</span>
                 </div>
                 <div>
-                    <BlueButton size={"large"} isgo={isCheck.toString()}>
+                    <BlueButton size={"large"} isgo={isCheck.toString()}  onClick={() => history.push(`/event/${id}`)}>
                        { isCheck ? "Покинуть" : "Вступить" }
                     </BlueButton>
                     <Button size={"large"}>

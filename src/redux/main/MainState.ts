@@ -6,10 +6,12 @@ export interface IMainState {
   categories: ICategory[];
   filter: ISelected;
   EventsArr: IEvent[];
+  SelectedEvent: IEvent;
 }
 
 export const MainInitialState: IMainState = {
   categories: [] as ICategory[],
   filter: {} as ISelected,
-  EventsArr: [] as IEvent[]
+  EventsArr: [] as IEvent[],
+  SelectedEvent: {} as IEvent
 };

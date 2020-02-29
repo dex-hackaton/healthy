@@ -16,9 +16,21 @@ export class MainApiRequest extends BaseRequest {
   }
 
   events(params?: string, config?: Record<string, any>): Promise<IEvent[]> {
-    console.log('params', params);
+    console.log("params", params);
     return this.fetch(
       `/event`,
+      Object.assign(
+        {
+          method: "GET"
+        },
+        config
+      )
+    ).catch(BaseRequest.handleError);
+  }
+
+  event(params?: string[], config?: Record<string, any>): Promise<IEvent[]> {
+    return this.fetch(
+      `/event/?id=${params && params || null}`,
       Object.assign(
         {
           method: "GET"

@@ -10,5 +10,6 @@ export const MainActions = {
     "MAIN_GET_CATEGORIES"
   ),
   getEvents: actionCreator.async<string[] | never[], IEvent[], Error>("GET_EVENTS"),
+  getEvent: actionCreator.async<string[] | never[], IEvent, Error>("GET_EVENT"),
   setFilter: actionCreator<ISelected>("SET_FILTER")
 };

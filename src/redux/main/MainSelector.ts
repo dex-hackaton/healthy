@@ -12,3 +12,4 @@ export const getCategories = createSelector(
 export const getFilter = createSelector(mainState, state => state.filter);
 
 export const getEvents = createSelector(mainState, state => state.EventsArr);
+export const getEvent = createSelector(mainState, state => state.SelectedEvent);

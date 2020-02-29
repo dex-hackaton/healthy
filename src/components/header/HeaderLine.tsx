@@ -3,6 +3,7 @@ import {BootstrapContainer} from "../ui/BootstrapContainer";
 import styled from "styled-components";
 import {iconsPaths} from "../../core/iconsPaths";
 import {Menu} from "../menu/menu";
+import {useHistory} from "react-router";
 
 interface IProps {
   setMenu: () => void;
@@ -11,6 +12,8 @@ interface IProps {
 }
 
 export const HeaderLine: FC<IProps> = ({setMenu, menu, closeMenu}) => {
+  const history = useHistory();
+
   return (
       <HeadBlock>
         <BootstrapContainer>
@@ -20,12 +23,12 @@ export const HeaderLine: FC<IProps> = ({setMenu, menu, closeMenu}) => {
                 <IconImage onClick={setMenu} src={iconsPaths.menu} alt=""/>
                 {menu ? <Menu menuHandler={closeMenu}/> : null}
               </ImageBlock>
-              <IconImage src={iconsPaths.logo} alt=""/>
+              <IconImage src={iconsPaths.logo} alt="" onClick={() => history.push("/")}/>
             </LeftBlock>
             <RightBlock>
               <IconImage src={iconsPaths.search} alt=""/>
               <IconImage src={iconsPaths.notification} alt=""/>
-              <IconImage src={iconsPaths.profile} alt=""/>
+              <IconImage src={iconsPaths.profile} alt="" onClick={() => history.push("/profile")}/>
             </RightBlock>
           </MainBlock>
         </BootstrapContainer>
