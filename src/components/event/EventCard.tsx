@@ -120,7 +120,7 @@ const HeaderInfo = styled.span`
 
 const EventBody = styled.div``;
 
-const BodyText = styled.p`
+const BodyText = styled.div`
   font-size: 14px;
   line-height: 22px;
   color: #595959;
