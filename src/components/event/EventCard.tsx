@@ -15,6 +15,8 @@ export const EventCard: React.FC<IEvent> = ({
   like,
   place,
   id
+  place,
+   activity
 }) => {
   let [showFull, setShowFull] = useState(false);
 
@@ -66,6 +68,7 @@ export const EventCard: React.FC<IEvent> = ({
       <EventFooter
         id={id}
         type={{ id: "swimming", name: "Плавание" }}
+        type={{ id: activity, name: "Баскетбол" }}
         isCheck={false}
       />
     </MainBlock>
