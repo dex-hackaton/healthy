@@ -1,10 +1,17 @@
-import {reducerWithInitialState} from "typescript-fsa-reducers";
-import {MainInitialState} from "./MainState";
-import {MainActions} from "./MainActions";
+import { reducerWithInitialState } from "typescript-fsa-reducers";
+import { MainInitialState } from "./MainState";
+import { MainActions } from "./MainActions";
 
-export const MainReducer = reducerWithInitialState(MainInitialState).case(
-    MainActions.getCategories.done,
-    (state, {result}) => ({
-        categories: result
-    })
-);
+export const MainReducer = reducerWithInitialState(MainInitialState)
+  .case(MainActions.getCategories.done, (state, { result }) => ({
+    ...state,
+    categories: result
+  }))
+  .case(MainActions.setFilter, (state, payload) => ({
+    ...state,
+    filter: payload
+  }))
+  .case(MainActions.getEvents.done, (state, { result }) => ({
+    ...state,
+    EventsArr: [...result]
+  }));

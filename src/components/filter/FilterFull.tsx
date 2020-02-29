@@ -1,31 +1,29 @@
-import React, {createRef, FC, useEffect, useState} from "react";
+import React, { createRef, FC, useEffect, useState } from "react";
 import styled from "styled-components";
-import {iconsPaths} from "../../core/iconsPaths";
-import {Button, Checkbox, DatePicker} from "antd";
-import {useDispatch, useSelector} from "react-redux";
-import {MainActionsAsync} from "../../redux/main/MainActionsAsync";
-import {getCategories} from "../../redux/main/MainSelector";
-import {ISelected} from "./Filter";
-import {CheckboxValueType} from "antd/es/checkbox/Group";
-import {clearAllBodyScrollLocks, disableBodyScroll} from "body-scroll-lock";
+import { iconsPaths } from "../../core/iconsPaths";
+import { Button, Checkbox, DatePicker } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { MainActionsAsync } from "../../redux/main/MainActionsAsync";
+import { getCategories } from "../../redux/main/MainSelector";
+import { ISelected } from "./Filter";
+import { CheckboxValueType } from "antd/es/checkbox/Group";
+import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
+import { MainActions } from "../../redux/main/MainActions";
 
 interface IProps {
   filter: ISelected;
-  setFilter: (val: ISelected) => void;
   displayHandler: () => void;
 }
 
-export const FilterFull: FC<IProps> = ({
-                                         filter,
-                                         setFilter,
-                                         displayHandler
-                                       }) => {
+export const FilterFull: FC<IProps> = ({ filter, displayHandler }) => {
   const dispatch = useDispatch();
   const categories = useSelector(getCategories);
   const [startDate, setStartDate] = useState(filter.startDate);
   const [endDate, setEndDate] = useState(filter.endDate);
   const [free, setIsFree] = useState(filter.free);
-  const [checkedCategories, setCheckedCategories] = useState<CheckboxValueType[]>(filter.categories || []);
+  const [checkedCategories, setCheckedCategories] = useState<
+    CheckboxValueType[]
+  >(filter.categories || []);
 
   const refElement = createRef<HTMLDivElement>();
   useEffect(() => {
@@ -34,12 +32,14 @@ export const FilterFull: FC<IProps> = ({
   });
 
   const setFilterHandler = () => {
-    setFilter({
-      startDate,
-      endDate,
-      free,
-      categories: checkedCategories as string[]
-    });
+    dispatch(
+      MainActions.setFilter({
+        startDate,
+        endDate,
+        free,
+        categories: checkedCategories as string[]
+      })
+    );
   };
 
   useEffect(() => {
@@ -59,63 +59,63 @@ export const FilterFull: FC<IProps> = ({
   };
 
   return (
-      <MainContainer ref={refElement}>
-        <CrossIcon src={iconsPaths.cross} alt="" onClick={displayHandler}/>
-        <WhiteContainer>
-          <MainBlock>
-            <HeadLabel>Уточнить поиск</HeadLabel>
-            <SimpleLabel>Категории:</SimpleLabel>
-            <Checkbox.Group
-                style={{width: "100%"}}
-                value={checkedCategories}
-                onChange={setCategoriesHandle}
-            >
-              <CheckBoxListBlock>
-                <CheckBoxBlock>
-                  <Checkbox value="" checked={checkedCategories.includes("")}/>
-                  <AllCategoriesName>Все категории</AllCategoriesName>
-                </CheckBoxBlock>
-                {categories &&
+    <MainContainer ref={refElement}>
+      <CrossIcon src={iconsPaths.cross} alt="" onClick={displayHandler} />
+      <WhiteContainer>
+        <MainBlock>
+          <HeadLabel>Уточнить поиск</HeadLabel>
+          <SimpleLabel>Категории:</SimpleLabel>
+          <Checkbox.Group
+            style={{ width: "100%" }}
+            value={checkedCategories}
+            onChange={setCategoriesHandle}
+          >
+            <CheckBoxListBlock>
+              <CheckBoxBlock>
+                <Checkbox value="" checked={checkedCategories.includes("")} />
+                <AllCategoriesName>Все категории</AllCategoriesName>
+              </CheckBoxBlock>
+              {categories &&
                 categories.map(item => (
-                    <CheckBoxBlock key={item.id}>
-                      <Checkbox
-                          value={item.id}
-                          disabled={checkedCategories[0] === ""}
-                      />
+                  <CheckBoxBlock key={item.id}>
+                    <Checkbox
+                      value={item.id}
+                      disabled={checkedCategories[0] === ""}
+                    />
 
-                      <MyIcon src={`/categories/${item.id}.svg`}/>
-                      <CategorieLabel>{item.name}</CategorieLabel>
-                    </CheckBoxBlock>
+                    <MyIcon src={`/categories/${item.id}.svg`} />
+                    <CategorieLabel>{item.name}</CategorieLabel>
+                  </CheckBoxBlock>
                 ))}
-              </CheckBoxListBlock>
-            </Checkbox.Group>
-            <DateBlock>
-              <SimpleLabel>Показать в период:</SimpleLabel>
-              <DatePicker
-                  placeholder="C"
-                  value={startDate}
-                  onChange={date => date && setStartDate(date)}
-              />
-              <DatePicker
-                  placeholder="До"
-                  value={endDate}
-                  onChange={date => date && setEndDate(date)}
-              />
-            </DateBlock>
-            <ButtonBlock>
-              <Checkbox
-                  checked={free}
-                  onChange={e => setIsFree(e.target.checked)}
-              >
-                Не показывать мероприятия с платными услугами
-              </Checkbox>
-              <MyGrayButton onClick={applyFilter}>
-                Применить настройки
-              </MyGrayButton>
-            </ButtonBlock>
-          </MainBlock>
-        </WhiteContainer>
-      </MainContainer>
+            </CheckBoxListBlock>
+          </Checkbox.Group>
+          <DateBlock>
+            <SimpleLabel>Показать в период:</SimpleLabel>
+            <DatePicker
+              placeholder="C"
+              value={startDate}
+              onChange={date => date && setStartDate(date)}
+            />
+            <DatePicker
+              placeholder="До"
+              value={endDate}
+              onChange={date => date && setEndDate(date)}
+            />
+          </DateBlock>
+          <ButtonBlock>
+            <Checkbox
+              checked={free}
+              onChange={e => setIsFree(e.target.checked)}
+            >
+              Не показывать мероприятия с платными услугами
+            </Checkbox>
+            <MyGrayButton onClick={applyFilter}>
+              Применить настройки
+            </MyGrayButton>
+          </ButtonBlock>
+        </MainBlock>
+      </WhiteContainer>
+    </MainContainer>
   );
 };
 

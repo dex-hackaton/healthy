@@ -1,9 +1,9 @@
 export class BaseRequest {
-  protected static token: string | undefined;
+  protected static token: string | undefined | null = localStorage.getItem("token");
   protected baseurl: string = "https://api.healthy.adds.md";
 
   static setToken = (token: string | undefined) => {
-    BaseRequest.token = token;
+    token && localStorage.setItem("token", token);
   };
 
   static handleError = async (error: any): Promise<any> => {
@@ -16,12 +16,12 @@ export class BaseRequest {
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Cookie: BaseRequest.token ? `access_token=` + BaseRequest.token : ""
+      Authorization: `JWT ${localStorage.getItem("token")}`,
     };
 
     return fetch(
-        this.baseurl + url,
-        Object.assign({headers: headers}, config)
+      this.baseurl + url,
+      Object.assign({ headers: headers }, config)
     ).then(response => {
       if (!response.status || response.status < 200 || response.status >= 300) {
         throw response.json();

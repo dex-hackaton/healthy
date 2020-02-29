@@ -2,7 +2,6 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunkMiddleware from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {MainReducer} from "./main/MainReducer";
-import logger from "redux-logger";
 
 const appReducer = combineReducers({
   main: MainReducer
@@ -23,7 +22,7 @@ export const initializeStore = (initialState = {}) => {
   return createStore(
       rootReducer,
       initialState,
-      composeWithDevTools(applyMiddleware(thunkMiddleware, logger))
+      composeWithDevTools(applyMiddleware(thunkMiddleware))
   );
 };
 
