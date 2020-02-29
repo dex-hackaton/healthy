@@ -21,7 +21,7 @@ export const EventFooter: React.FC<Props> = ({type, isCheck}) => {
                     <span>{type.name}</span>
                 </div>
                 <div>
-                    <BlueButton size={"large"} isGo={isCheck}>
+                    <BlueButton size={"large"} isgo={isCheck.toString()}>
                        { isCheck ? "Покинуть" : "Вступить" }
                     </BlueButton>
                     <Button size={"large"}>
@@ -51,7 +51,7 @@ const MyIcon = styled.img`
   margin-right: 10px;
 `;
 
-const BlueButton = styled(Button)<{ isGo: boolean }>`
-     background-color: ${props => (props.isGo ? "transparent" : "#BAE7FF")};
+const BlueButton = styled(Button)<{ isgo: string }>`
+     background-color: ${props => (props.isgo === "true" ? "transparent" : "#BAE7FF")};
 `;
 

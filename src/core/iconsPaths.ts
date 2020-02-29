@@ -10,6 +10,12 @@ import settings from "../assets/icons/settings.svg";
 import arrow from "../assets/icons/arrow.svg";
 import cross from "../assets/icons/cross.svg";
 import dollar from "../assets/icons/dollar.svg";
+import calendar from "../assets/icons/calendar.svg";
+import height from "../assets/icons/height.svg";
+import weight from "../assets/icons/weight.svg";
+import fire from "../assets/icons/fire.svg";
+import water from "../assets/icons/water.svg";
+import bulb from "../assets/icons/bulb.svg";
 
 import userPic from "../assets/icons/userLogo.png";
 
@@ -26,5 +32,11 @@ export const iconsPaths = {
   arrow,
   cross,
   dollar,
-  userPic
+  userPic,
+  calendar,
+  height,
+  weight,
+  fire,
+  water,
+  bulb
 };

@@ -8,6 +8,8 @@ import { useSessionContext } from "./core/context/SessionContext";
 import { Route, Switch } from "react-router";
 import { SignIn } from "./components/signin/SignIn";
 import { MainPage } from "./components/MainPage";
+import {Profile} from "./components/profile/Profile";
+import {iconsPaths} from "./core/iconsPaths";
 
 export const App = () => {
   const [sessionContext, updateSessionContext] = useSessionContext();
@@ -41,7 +43,15 @@ export const App = () => {
             path="/"
             component={MainPage}
           />
-
+            <Route path="/profile">
+                <Profile
+                    userImage={iconsPaths.userPic}
+                    userName="Вадим Зожный"
+                    weight={80}
+                    height={177}
+                    age={30}
+                />
+            </Route>
           <Route path="/login/:token" component={SignIn} />
           <Route path="/login/" component={SignIn} />
         </Switch>

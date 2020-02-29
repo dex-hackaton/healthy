@@ -3,15 +3,20 @@ import {Tabs} from "antd";
 import styled from "styled-components";
 import {BootstrapContainer} from "../ui/BootstrapContainer";
 import {MainInformation} from "./MainInformation";
+import {Settings} from "./Settings";
+import {iconsPaths} from "../../core/iconsPaths";
 
 interface IProps {
     userImage: string;
     userName: string;
+    weight: number;
+    height: number;
+    age: number;
 }
 
-export const Profile: FC<IProps> = ({userImage, userName}) => {
+export const Profile: FC<IProps> = ({userImage, userName, weight, height, age }) => {
     const {TabPane} = Tabs;
-
+    console.log("test");
     return (
         <MainContainer>
             <BootstrapContainer>
@@ -19,19 +24,40 @@ export const Profile: FC<IProps> = ({userImage, userName}) => {
                     <UserPicture src={userImage} alt={""}/>
                     <UserNameLabel>{userName}</UserNameLabel>
                 </UserBlock>
+                <UserParametrs>
+                    <IconImage src={iconsPaths.weight} alt=""/><span>{weight} кг</span>
+                    <IconImage src={iconsPaths.height} alt=""/><span>{height} см</span>
+                    <IconImage src={iconsPaths.calendar} alt=""/><span>{age} лет</span>
+                </UserParametrs>
             </BootstrapContainer>
             <MyTabs defaultActiveKey="1" size={"large"}>
-                <TabPane tab="Основные" key="1">
+                <TabPane tab="Основные" key="1" style={{backgroundColor: "#e5e5e5"}}>
                     <GrayLine/>
-                    <MainInformation/>
+                    <MainInformation indexBody={19.8} needWeight={91} goal={"Набрать вес"} energy={2540} water={2.1}/>
                 </TabPane>
-                <TabPane tab="Карточка участника" key="2" style={{width: 174}}>
-                    Content of Tab Pane 2
+                <TabPane tab="Настройки" key="2" style={ {width: "100%"}}>
+                    <GrayLine/>
+                    <Settings />
                 </TabPane>
             </MyTabs>
         </MainContainer>
     );
 };
+
+const UserParametrs = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+    img {
+        margin-right: 8px;
+    }
+    span {
+        font-size: 14px;
+        line-height: 22px;
+        color: #000000;
+         margin-right: 20px;
+    }
+`;
 
 const MyTabs = styled(Tabs)`
   font-family: SF Pro Display, serif;
@@ -76,6 +102,7 @@ const UserBlock = styled.div`
 const MainContainer = styled.div`
   display: flex;
   flex-flow: column;
+  max-width: 100%;
 `;
 
 const GrayLine = styled.div`
@@ -83,3 +110,4 @@ const GrayLine = styled.div`
   width: 100vw;
   background: #e5e5e5;
 `;
+const IconImage = styled.img``;
