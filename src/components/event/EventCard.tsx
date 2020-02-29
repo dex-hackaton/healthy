@@ -29,14 +29,17 @@ export const EventCard: React.FC<Props> = ({title, isPay, date, location, descri
         }
 
          return (
+             <EvenBodyBlock>
              <BodyText>
                  {newDescription}
+             </BodyText>
                  { count > 100 &&
-                     (showFull ?
-                         <div><a onClick={ () => setShowFull(false)}>скрыть</a></div> :
-                         <div><a onClick={ () => setShowFull(true)}>подробнее</a></div>)
+                 (showFull ?
+                     <div><a onClick={ () => setShowFull(false)}>скрыть</a></div> :
+                     <div><a onClick={ () => setShowFull(true)}>подробнее</a></div>)
                  }
-             </BodyText>);
+             </EvenBodyBlock>
+         );
     };
 
     return (
@@ -108,7 +111,13 @@ const HeaderInfo = styled.span`
         }
     }
 `;
-
+const EvenBodyBlock = styled.div`
+    border-bottom: 1px solid #F0F0F0;
+    margin-bottom: 16px;
+    &:last-of-type {
+    border: none;
+    }
+`;
 const EventBody = styled.div`
 `;
 

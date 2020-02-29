@@ -41,7 +41,13 @@ export const App = () => {
         </ProtectedRoute>
 
         <ProtectedRoute {...defaultProtectedRouteProps} path="/profile">
-          <Profile userImage={iconsPaths.userPic} userName="Вадим Зожный"/>
+          <Profile
+              userImage={iconsPaths.userPic}
+              userName="Вадим Зожный"
+              weight={80}
+              height={177}
+              age={30}
+          />
         </ProtectedRoute>
         <Route path="/login" component={SignIn}/>
         <Route path="/registration" component={Registration}/>
