@@ -30,7 +30,7 @@ export class MainApiRequest extends BaseRequest {
 
   event(params?: string[], config?: Record<string, any>): Promise<IEvent[]> {
     return this.fetch(
-      `/event/?id=${params && params || null}`,
+      `/event?id=${params && params || null}`,
       Object.assign(
         {
           method: "GET"
