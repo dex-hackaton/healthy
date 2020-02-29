@@ -14,9 +14,8 @@ export const EventCard: React.FC<IEvent> = ({
   description,
   like,
   place,
-  id
-  place,
-   activity
+  id,
+  activity,
 }) => {
   let [showFull, setShowFull] = useState(false);
 
@@ -67,7 +66,6 @@ export const EventCard: React.FC<IEvent> = ({
       </BootstrapContainer>
       <EventFooter
         id={id}
-        type={{ id: "swimming", name: "Плавание" }}
         type={{ id: activity, name: "Баскетбол" }}
         isCheck={false}
       />
@@ -78,7 +76,7 @@ export const EventCard: React.FC<IEvent> = ({
 const MainBlock = styled.div`
   color: #262626;
   font-family: SF Pro Display;
-  background-color: #FFF;
+  background-color: #fff;
 `;
 
 const EventHeader = styled.div`
