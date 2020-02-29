@@ -73,6 +73,7 @@ export const EventCard: React.FC<IEvent> = ({
 const MainBlock = styled.div`
   color: #262626;
   font-family: SF Pro Display;
+  background-color: #FFF;
 `;
 
 const EventHeader = styled.div`

@@ -33,7 +33,7 @@ export const Profile: FC<IProps> = ({userImage, userName, weight, height, age })
             <MyTabs defaultActiveKey="1" size={"large"}>
                 <TabPane tab="Основные" key="1" style={{backgroundColor: "#e5e5e5"}}>
                     <GrayLine/>
-                    <MainInformation indexBody={19.8} needWeight={91} goal={"Набрать вес"} energy={2540}/>
+                    <MainInformation indexBody={19.8} needWeight={91} goal={"Набрать вес"} energy={2540} water={2.1}/>
                 </TabPane>
                 <TabPane tab="Настройки" key="2" style={ {width: "100%"}}>
                     <GrayLine/>
