@@ -64,7 +64,7 @@ export const EventCard: React.FC<IEvent> = ({
         <EventBody>{renderDescription()}</EventBody>
       </BootstrapContainer>
       <EventFooter
-        type={{ id: activity, name: "activity" }}
+        type={{ id: activity, name: "Баскетбол" }}
         isCheck={false}
       />
     </MainBlock>
